@@ -1,4 +1,5 @@
 from inspect import Traceback
+#For changing players,
 import itertools
  
 game = [[0,0,0],
@@ -71,6 +72,7 @@ while play:
         [0,0,0],
         [0,0,0]]
     game_won=False
+   #Iterator that cycles between two player numbers
     player_cycle=itertools.cycle([1,2])
     game,_ =game_Board(game, display=True)
     while not game_won:
@@ -83,6 +85,7 @@ while play:
             player_row = int(input("Which row? "))
             print()
             game, played= game_Board(game, player=current_player, row=player_row, column=player_col)
+        #Final Check after winning
         if win(game):
             game_won=True
             again = input("Do you want to play again? (y/n) ")
