@@ -1,5 +1,5 @@
+#Blank Slate for Game
 from inspect import Traceback
-#For changing players,
 import itertools
  
 game = [[0,0,0],
@@ -65,6 +65,12 @@ def game_Board(game_map,player=0,row=0,column=0,display=False):
     except Exception as e:
         print(str(e))
         return game_map,False
+def board_full(game):
+    for row in game:
+        if 0 in row:
+            return False
+        else:
+            return True
 play = True
 players= [1,2]
 while play:
@@ -72,7 +78,6 @@ while play:
         [0,0,0],
         [0,0,0]]
     game_won=False
-   #Iterator that cycles between two player numbers
     player_cycle=itertools.cycle([1,2])
     game,_ =game_Board(game, display=True)
     while not game_won:
@@ -85,9 +90,11 @@ while play:
             player_row = int(input("Which row? "))
             print()
             game, played= game_Board(game, player=current_player, row=player_row, column=player_col)
-        #Final Check after winning
-        if win(game):
+            dub=win(game)
+        if dub or board_full(game):
             game_won=True
+            if board_full(game) and not dub :
+                print("Looks like its a tie!")
             again = input("Do you want to play again? (y/n) ")
             if again.lower() == "y":
                 print("restarting")
